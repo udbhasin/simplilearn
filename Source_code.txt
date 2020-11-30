@@ -1,0 +1,182 @@
+package simplilearn_project;
+import java.util.*;
+import java.io.*;
+public class project {
+	public static void menu()throws Exception
+	{
+		main(null);
+	}
+	public static void search_File(String f_search)
+	{  File f=new File("D:\\",f_search);
+	if(f.exists()==true)
+	{
+		System.out.println("The File is present at location "+ f.getAbsolutePath());
+		System.out.println("");
+	}
+	else
+	{
+		System.out.println("The searched File name does not exist");
+		System.out.println("");
+	}
+	}
+	
+	public static void delete_File(String f_delete) 
+	{    File f=new File("D:\\",f_delete);
+		if(f.exists()==true)
+		{
+			f.delete();
+		     System.out.println("The file with name "+ f_delete +" has been deleted.");
+		     System.out.println("");
+	    }
+		else
+	       {
+	    	System.out.println("The File Entered does not exist, please enter a valid File name.");
+	    	System.out.println("");
+	       }
+		
+	}
+	
+	public static void create_File(String f_name)throws IOException
+	{       File f=new File("D:\\",f_name);
+	     
+		       if(f.exists()==false)
+	           	{   f.createNewFile();
+			       System.out.println("New File with name "+ f_name +" has been created");
+			       System.out.println("");
+	         	}         
+		       else
+		        {
+			       System.out.println("File with name "+f_name +"already exists");
+			       
+			       System.out.println();
+		         }
+	  }
+	
+	
+	public static void displayfiles()
+	{     File f=new File("D:\\");
+	      String[] a=f.list();
+	      //Arrays.sort(a); We can sort the array by either using build in API feature 
+	      int size=a.length;// writing own sorting algorithm.
+	      for(int i=0;i<size-1;i++)
+	      {
+	    	  for(int j=i+1;j<a.length;j++)
+	    	  {
+	    		  if(a[i].compareTo(a[j])>0)   
+	    		  {  
+	    		  //swapping array elements  
+	    		  String temp = a[i];  
+	    		  a[i] = a[j];  
+	    		  a[j] = temp;  
+	    		  }
+	    		  
+	    	  }
+	      }Arrays.toString(a);
+	      int count=0;
+	      for(String b:a) 
+	      {
+		     File f2=new File(f,b);
+		      if(f2.isFile())
+		         {
+			       System.out.println(b);
+			       count++;
+			    
+			      }     
+	        }System.out.println("Total number of files are "+count);
+		
+	 }
+	
+public static void main(String[] args)throws Exception
+{Scanner s=new Scanner(System.in);
+System.out.println("*********************************************************************************************");	
+System.out.println(" *******************************************************************************************");	
+System.out.println("   ****************************************************************************************");	
+System.out.println("     *************************************************************************************");	
+System.out.println("       **********************************************************************************");	
+System.out.println("         ******************************************************************************");	
+System.out.println("                            Welcome to LOCKEDME.COMP ");   //Welcome Banner
+System.out.println("                            Presented By Udit Bhasin");   //Presenter's Name
+System.out.println("          == == == == == == == == == == == == == == == == == == == ");
+System.out.println("                          == == == == == == == == == ==");
+
+System.out.println("                Select the options specified for different operations");
+System.out.println("                   A:-Press 1 for retrieving the files");
+System.out.println("                   B:-Press 2 to perform business level operatons");
+System.out.println("                   C:-Press 3 for closing the application");
+
+try{
+	int n=s.nextInt();
+
+
+	
+switch(n)
+         {
+           case(1): 
+           {
+        	 System.out.println("The Files In The Current Directory in ascending manner are:-");
+             displayfiles();
+             break;
+        	}  
+           
+           case(2):{
+        	   System.out.println("Which Bussiness level operation you want to perform ");
+        	   System.out.println("Press 1 to Add a new File");
+        	   System.out.println("Press 2 to Delete a File");
+        	   System.out.println("Press 3 to Search a File");
+        	   System.out.println("Press 4Go back to the Main Menu");
+        	   int a=s.nextInt();
+        	       switch(a) 
+        	       {       case(1):
+        	            {
+        	    	                 System.out.println("how ,many file you want to add?");
+        	    	                 int b=s.nextInt();
+        	    	                 for(int i=1;i<=b;i++)
+        	    	                {  System.out.println("Type the name of the file number "+ i +" to be created");
+        	    	                    String f_add=s.next();
+        	    	                    create_File(f_add);
+        	    	                }  
+        	    	                 break;
+        	              }
+        	              case(2):
+        	             {
+        	            	  System.out.println("How many file you want to Delete?");
+        	                   int b=s.nextInt();
+        	            	    for(int i=1;i<=b;i++)
+        	            	    {
+        	            	    	System.out.println("Enter the name of file number "+ i +" to be deleted");
+        	    	                 String f_delete=s.next();  
+        	    	                   delete_File(f_delete);
+        	            	    }     
+        	                     break;  
+        	             }
+        	              case(3):
+        	              { System.out.println("how ,many file you want to Search");
+	    	                 int b=s.nextInt();
+	    	                 for(int i=1;i<=b;i++)
+     	            	    {
+     	            	    	System.out.println("Enter the name of the File number "+ i +" you want to search");
+     	    	                 String f_search=s.next();  
+     	    	                   search_File(f_search);
+     	            	    } break;    
+        	              }
+        	              case(4):
+        	              {
+        	            	  menu();
+        	              }
+        	              
+        	          }
+        	       
+        	   
+           break;}
+           case(3):{
+        	   System.out.println("The application is closing!!!");
+        	   break;
+           }
+          }}
+catch(InputMismatchException e)// Exception handling in case of Wrong value of n is entered
+
+{System.out.println("The input should be numberic");
+	}}
+
+	}
+
